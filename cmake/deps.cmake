@@ -11,3 +11,7 @@ set(CMAKE_FIND_PACKAGE_PREFER_CONFIG TRUE)
 if(NOT BUILD_pybind11)
   find_package(pybind11 REQUIRED)
 endif()
+
+if(NOT BUILD_pybind11_abseil)
+  find_package(pybind11_abseil REQUIRED)
+endif()

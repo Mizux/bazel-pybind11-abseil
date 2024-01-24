@@ -1,4 +1,4 @@
-PROJECT := bazel-pybind11
+PROJECT := bazel-pybind11-abseil
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 SHA1 := $(shell git rev-parse --verify HEAD)
 

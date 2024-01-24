@@ -15,6 +15,8 @@ RUN dnf -y update \
 && dnf -y install python3.11-devel python3.11-pip python3.11-wheel \
 && dnf clean all \
 && rm -rf /var/cache/dnf
+RUN python3.11 -m pip install \
+ absl-py mypy
 
 # Add the library src to our build env
 FROM env AS devel

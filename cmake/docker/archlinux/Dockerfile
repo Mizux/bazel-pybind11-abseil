@@ -9,6 +9,8 @@ RUN pacman -Syu --noconfirm git base-devel cmake
 RUN pacman -Syu --noconfirm \
  python python-pip python-wheel python-setuptools \
  python-virtualenv
+RUN python3 -m pip install --break-system-package \
+ absl-py mypy
 
 # Add the library src to our build env
 FROM env AS devel

@@ -15,6 +15,8 @@ RUN apt-get update -qq \
  python3-venv python3-virtualenv \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN python3 -m pip install --break-system-package \
+ absl-py mypy
 
 # Add the library src to our build env
 FROM env AS devel

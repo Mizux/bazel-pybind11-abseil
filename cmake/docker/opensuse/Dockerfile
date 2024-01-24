@@ -14,6 +14,9 @@ RUN zypper update -y \
  python3 python3-devel python3-pip python3-wheel \
  python3-virtualenv \
 && zypper clean -a
+RUN python3 -m pip install \
+ --break-system-packages \
+ absl-py mypy
 
 # Add the library src to our build env
 FROM env AS devel

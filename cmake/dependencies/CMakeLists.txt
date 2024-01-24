@@ -7,6 +7,42 @@ set(BUILD_TESTING OFF)
 set(CMAKE_Fortran_COMPILER OFF)
 
 # ##############################################################################
+# ZLIB
+# ##############################################################################
+if(BUILD_ZLIB)
+  message(CHECK_START "Fetching ZLIB")
+  list(APPEND CMAKE_MESSAGE_INDENT "  ")
+  FetchContent_Declare(
+    zlib
+    GIT_REPOSITORY "https://github.com/madler/ZLIB.git"
+    GIT_TAG "v1.2.13"
+    PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/ZLIB.patch")
+  FetchContent_MakeAvailable(zlib)
+  list(POP_BACK CMAKE_MESSAGE_INDENT)
+  message(CHECK_PASS "fetched")
+endif()
+
+# ##############################################################################
+# ABSEIL-CPP
+# ##############################################################################
+if(BUILD_absl)
+  message(CHECK_START "Fetching Abseil-cpp")
+  list(APPEND CMAKE_MESSAGE_INDENT "  ")
+  set(ABSL_ENABLE_INSTALL ON)
+  set(ABSL_USE_SYSTEM_INCLUDES ON)
+  set(ABSL_PROPAGATE_CXX_STD ON)
+  FetchContent_Declare(
+    abseil-cpp
+    GIT_REPOSITORY "https://github.com/abseil/abseil-cpp.git"
+    GIT_TAG "20230802.1"
+    PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/abseil-cpp-20230802.1.patch"
+  )
+  FetchContent_MakeAvailable(abseil-cpp)
+  list(POP_BACK CMAKE_MESSAGE_INDENT)
+  message(CHECK_PASS "fetched")
+endif()
+
+# ##############################################################################
 # pybind11
 # ##############################################################################
 # Find Python 3
@@ -21,7 +57,7 @@ if(BUILD_pybind11)
     pybind11
     GIT_REPOSITORY "https://github.com/pybind/pybind11.git"
     GIT_TAG "v2.11.1"
-    #PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/pybind11-2.11.1.patch"
+    PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/pybind11.patch"
   )
   FetchContent_MakeAvailable(pybind11)
   list(POP_BACK CMAKE_MESSAGE_INDENT)

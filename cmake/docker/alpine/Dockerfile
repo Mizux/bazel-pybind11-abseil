@@ -9,6 +9,8 @@ RUN apk add --no-cache git build-base linux-headers cmake
 RUN apk add --no-cache \
  python3-dev py3-pip py3-wheel \
  py3-virtualenv
+RUN python3 -m pip install --break-system-package \
+ absl-py mypy
 
 # Add the library src to our build env
 FROM env AS devel
