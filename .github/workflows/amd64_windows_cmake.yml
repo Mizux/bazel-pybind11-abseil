@@ -16,7 +16,14 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Check CMake
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install python3
+        run: python3 -m pip install --user mypy mypy-protobuf absl-py setuptools wheel numpy pandas
+      - name: Add Python binaries to path
+        run: echo "$((Get-Item ~).FullName)/AppData/Roaming/Python/Python311/Scripts" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      - name: Check cmake
         run: |
           cmake --version
           cmake -G || true
