@@ -37,7 +37,7 @@ Github-CI:
 <a href="#license">License</a> |
 </nav>
 
-Bazel C++ and pybind11 sample with tests and GitHub CI support.<br>
+Bazel C++, pybind11 and abseil-cpp sample with tests and GitHub CI support.<br>
 This project should run on GNU/Linux, MacOS and Windows.
 
 note: A CMake support is also provided as comparison
@@ -58,7 +58,7 @@ The project layout is as follow:
 * [pure_lib](pure_lib) Pure python library to check Bazel Python support.
 * [bp11](bp11) Python package name.
   * [foo](bp11/foo) Simple C++ library.
-    * [python](bp11/foo/python) Python wrapper using Pybind11.
+    * [python](bp11/foo/python) Python wrapper using Pybind11 and Abseil-cpp.
 
 note: Due to a limitation of `bazel` and `protoc` directory layout must follow
 the python module hierarchy (ed in CMake we create our python layout in the
