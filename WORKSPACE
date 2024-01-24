@@ -31,11 +31,22 @@ git_repository(
 )
 
 # Dependencies
+
 ## Python
 load("@rules_python//python:repositories.bzl", "py_repositories")
 py_repositories()
 
-## `pybind11_bazel`
+# Create a central external repo, @pip_deps, that contains Bazel targets for all the
+# third-party packages specified in the requirements.txt file.
+load("@rules_python//python:pip.bzl", "pip_parse")
+pip_parse(
+   name = "pip_deps",
+   requirements_lock = "//:requirements.txt",
+)
+
+load("@pip_deps//:requirements.bzl", install_pip_deps="install_deps")
+install_pip_deps()
+
 git_repository(
     name = "pybind11_bazel",
     commit = "23926b00e2b2eb2fc46b17e587cf0c0cfd2f2c4b", # 2023/11/29
