@@ -8,10 +8,10 @@ digraph DockerDeps {
   SRC [label="git repo", shape=folder];
 
   subgraph clusterDockerfile {
-    ENV_IMG [label="bazel-pybind11:<distro>_env\nenv"];
-    DEVEL_IMG [label="bazel-pybind11:<distro>_devel\ndevel"];
-    BUILD_IMG [label="bazel-pybind11:<distro>_build\nbuild"];
-    TEST_IMG [label="bazel-pybind11:<distro>_test\ntest"];
+    ENV_IMG [label="bazel-pybind11-abseil:<distro>_env\nenv"];
+    DEVEL_IMG [label="bazel-pybind11-abseil:<distro>_devel\ndevel"];
+    BUILD_IMG [label="bazel-pybind11-abseil:<distro>_build\nbuild"];
+    TEST_IMG [label="bazel-pybind11-abseil:<distro>_test\ntest"];
 
     edge [color=black];
     ENV_IMG -> DEVEL_IMG;

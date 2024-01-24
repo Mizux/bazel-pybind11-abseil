@@ -1,3 +1,6 @@
 exports_files([
-  "pybind11_bazel.patch",
+    "abseil-cpp-20230802.1.patch",
+    "pybind11.patch",
+    "pybind11_bazel.patch",
+    "pybind11_abseil.patch",
 ])

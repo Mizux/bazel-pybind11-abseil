@@ -43,5 +43,5 @@ RUN bazel build \
 FROM build AS test
 RUN bazel test \
  -c opt \
- --test_output=all \
+ --test_output=errors \
  ...
