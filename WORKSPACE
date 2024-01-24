@@ -70,6 +70,12 @@ new_git_repository(
     remote = "https://github.com/pybind/pybind11.git",
 )
 
+new_git_repository(
+    name = "pybind11_abseil",
+    commit = "52f27398876a3177049977249e004770bd869e61", # 2024/01/11
+    remote = "https://github.com/pybind/pybind11_abseil.git",
+)
+
 load("@pybind11_bazel//:python_configure.bzl", "python_configure")
 python_configure(name = "local_config_python", python_version = "3")
 bind(
