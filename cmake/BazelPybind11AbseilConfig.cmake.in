@@ -1,6 +1,6 @@
-# BazelPybind11 CMake configuration file
+# BazelPybind11Abseil CMake configuration file
 
 #include(CMakeFindDependencyMacro)
 #find_dependency(... REQUIRED NO_MODULE)
 
-include("${CMAKE_CURRENT_LIST_DIR}/BazelPybind11Targets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/BazelPybind11AbseilTargets.cmake")
