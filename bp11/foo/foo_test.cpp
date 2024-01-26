@@ -11,6 +11,14 @@ TEST(FooTest, FreeFunction) {
   EXPECT_NO_THROW(freeFunction(int64_t{42}));
 }
 
+TEST(FooTest, AbslFunction) {
+  auto good = abslFunction("good");
+  EXPECT_TRUE(good.ok());
+
+  auto bad = abslFunction("error");
+  EXPECT_FALSE(bad.ok());
+}
+
 TEST(FooTest, StringVectorOutput) {
   std::vector<std::string> result;
   ASSERT_NO_THROW(result = stringVectorOutput(8));

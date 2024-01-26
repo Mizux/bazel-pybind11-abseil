@@ -3,6 +3,8 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include <absl/strings/string_view.h>
+#include <absl/status/status.h>
 
 //! @namespace bp11 The Foo namespace
 namespace bp11 {
@@ -16,6 +18,11 @@ void freeFunction(int level);
 /*! @brief Free function in foo namespace.
  * @param level Scope level.*/
 void freeFunction(int64_t level);
+
+//! @defgroup AbslFunction Abseil function usage.
+/*! @brief Abseil function in foo namespace.
+ * @param level Scope level.*/
+absl::Status abslFunction(absl::string_view string);
 //! @}
 
 //! @defgroup StringVector Vector of String usage.

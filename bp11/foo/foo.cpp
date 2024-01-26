@@ -15,6 +15,17 @@ void freeFunction(int64_t level) {
   std::cout << "[" << level << "] Exit " << __func__ << "(int64_t)" << std::endl;
 }
 
+absl::Status abslFunction(absl::string_view string) {
+  std::cout << "Enter " << __func__ << "()" << std::endl;
+  // encounter error
+  if (string == "error") {
+    return absl::InvalidArgumentError("error");
+  }
+  // else, return OK
+  return absl::OkStatus();
+  std::cout << "Exit " << __func__ << "()" << std::endl;
+}
+
 std::vector<std::string> stringVectorOutput(int level) {
   std::cout << "[" << level << "] Enter " << __func__ << "()" << std::endl;
   std::vector<std::string> result(level, std::to_string(level));
