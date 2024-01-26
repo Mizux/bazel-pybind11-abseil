@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <string>
 #include <vector>
-#include <absl/strings/string_view.h>
-#include <absl/status/status.h>
+#include "absl/strings/string_view.h"
+#include "absl/status/status.h"
 
 //! @namespace bp11 The Foo namespace
 namespace bp11 {

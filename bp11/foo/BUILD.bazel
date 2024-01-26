@@ -6,6 +6,10 @@ cc_library(
     hdrs = ["foo.hpp"],
     #strip_include_prefix = "include",
     visibility = ["//visibility:public"],
+    deps = [
+      "@com_google_absl//absl/status",
+      "@com_google_absl//absl/strings:string_view",
+    ],
 )
 
 cc_test(
