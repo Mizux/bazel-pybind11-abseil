@@ -46,7 +46,7 @@ endif()
 # pybind11
 # ##############################################################################
 # Find Python 3
-find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module OPTIONAL_COMPONENTS Development.Embed)
 
 if(BUILD_pybind11)
   message(CHECK_START "Fetching pybind11")
@@ -60,6 +60,20 @@ if(BUILD_pybind11)
     PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/pybind11.patch"
   )
   FetchContent_MakeAvailable(pybind11)
+  list(POP_BACK CMAKE_MESSAGE_INDENT)
+  message(CHECK_PASS "fetched")
+endif()
+
+if(BUILD_pybind11_abseil)
+  message(CHECK_START "Fetching pybind11_abseil")
+  list(APPEND CMAKE_MESSAGE_INDENT "  ")
+  FetchContent_Declare(
+    pybind11_abseil
+    GIT_REPOSITORY "https://github.com/pybind/pybind11_abseil.git" # 2024/01/11
+    GIT_TAG "52f27398876a3177049977249e004770bd869e61"
+    PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/pybind11_abseil.patch"
+  )
+  FetchContent_MakeAvailable(pybind11_abseil)
   list(POP_BACK CMAKE_MESSAGE_INDENT)
   message(CHECK_PASS "fetched")
 endif()
