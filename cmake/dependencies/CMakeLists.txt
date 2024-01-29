@@ -46,7 +46,9 @@ endif()
 # pybind11
 # ##############################################################################
 # Find Python 3
-find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module OPTIONAL_COMPONENTS Development.Embed)
+find_package(Python3 REQUIRED
+  COMPONENTS Interpreter Development.Module
+  OPTIONAL_COMPONENTS Development.Embed)
 
 if(BUILD_pybind11)
   message(CHECK_START "Fetching pybind11")

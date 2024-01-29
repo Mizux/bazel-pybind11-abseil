@@ -86,6 +86,9 @@ message(STATUS "Build pybind11: ${BUILD_pybind11}")
 option(BUILD_pybind11_abseil "Build the pybind11_abseil dependency Library" ON)
 message(STATUS "Python: Build pybind11_abseil: ${BUILD_pybind11_abseil}")
 
+option(GENERATE_PYTHON_STUB "Generate Python stub file (.pyi)" ON)
+message(STATUS "Python: Generate stub file: ${GENERATE_PYTHON_STUB}")
+
 option(FETCH_PYTHON_DEPS "Install python required modules if not available" ON)
 message(STATUS "Python fetch dependencies: ${FETCH_PYTHON_DEPS}")
 

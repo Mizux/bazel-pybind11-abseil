@@ -1,6 +1,11 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
+#include "pybind11_abseil/import_status_module.h"
+#include "pybind11_abseil/absl_casters.h"
+#include "pybind11_abseil/status_casters.h"
+
+
 #include "bp11/foo/foo.hpp"
 
 namespace py = pybind11;
@@ -16,6 +21,9 @@ PYBIND11_MODULE(pyfoo, m) {
     // Free function
     m.def("free_function", py::overload_cast<int>(&::bp11::foo::freeFunction), "A free function taking an int.");
     m.def("free_function", py::overload_cast<int64_t>(&::bp11::foo::freeFunction), "A free function taking an int64.");
+
+    // Absl function
+    m.def("absl_function", &::bp11::foo::abslFunction, "A function that return am absl::Status.");
 
     // Vector of String
     m.def("string_vector_output", &::bp11::foo::stringVectorOutput, "A function that return a vector of string.");
