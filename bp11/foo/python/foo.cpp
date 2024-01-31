@@ -2,7 +2,6 @@
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
 
-//#include "pybind11_abseil/import_status_module.h"
 #include "pybind11_abseil/absl_casters.h"
 #include "pybind11_abseil/status_casters.h"
 
@@ -18,9 +17,6 @@ namespace py = pybind11;
 
 PYBIND11_MODULE(pyfoo, m) {
     m.doc() = "pyfoo module"; // optional module docstring
-
-    //auto status_module = pybind11::google::ImportStatusModule();
-    //m.attr("StatusNotOk") = status_module.attr("StatusNotOk");
 
     // Absl function
     m.def("absl_function", &::bp11::foo::abslFunction, "A function that return am absl::Status.");
