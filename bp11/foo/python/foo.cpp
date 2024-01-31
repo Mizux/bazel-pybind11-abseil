@@ -1,6 +1,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 #include <pybind11/stl_bind.h>
+
 #include "pybind11_abseil/import_status_module.h"
 #include "pybind11_abseil/absl_casters.h"
 #include "pybind11_abseil/status_casters.h"
@@ -16,8 +17,8 @@ namespace py = pybind11;
 //PYBIND11_MAKE_OPAQUE(std::vector<std::vector<std::pair<int, int>>>);
 
 PYBIND11_MODULE(pyfoo, m) {
+    pybind11::google::ImportStatusModule();
     m.doc() = "pyfoo module"; // optional module docstring
-
     // Free function
     m.def("free_function", py::overload_cast<int>(&::bp11::foo::freeFunction), "A free function taking an int.");
     m.def("free_function", py::overload_cast<int64_t>(&::bp11::foo::freeFunction), "A free function taking an int64.");
