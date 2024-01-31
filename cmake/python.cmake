@@ -2,7 +2,9 @@
 cmake_minimum_required(VERSION 3.18)
 
 # Find Python 3
-find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
+find_package(Python3 REQUIRED
+  COMPONENTS Interpreter Development.Module
+  OPTIONAL_COMPONENTS Development.Embed)
 
 # Find if the python module is available,
 # otherwise install it (PACKAGE_NAME) to the Python3 user install directory.
