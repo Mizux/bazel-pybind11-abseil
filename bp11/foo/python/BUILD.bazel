@@ -8,6 +8,7 @@ pybind_extension(
     deps = [
         "//bp11/foo:foo",
         "@pybind11_abseil//pybind11_abseil:import_status_module",
+        "@pybind11_abseil//pybind11_abseil:absl_casters",
         "@pybind11_abseil//pybind11_abseil:status_casters",
     ],
 )
