@@ -7,13 +7,13 @@
 #include "absl/status/status.h"
 #include "absl/time/time.h"
 
-//! @namespace bp11 The Foo namespace
+//! @namespace bp11 The `bp11` namespace
 namespace bp11 {
-//! @namespace foo The Foo namespace
+//! @namespace foo The `foo` namespace
 namespace foo {
+
 //! @defgroup AbslFunction Abseil function usage.
-/*! @brief Abseil function in foo namespace.
- * @param level Scope level.*/
+//! @brief Abseil function in foo namespace.
 absl::Status abslFunction(absl::string_view string);
 
 absl::Duration MakeDuration(double secs);
@@ -22,6 +22,9 @@ bool IsInfiniteDuration(const absl::Duration& duration);
 bool CheckDuration(const absl::Duration& duration, double secs);
 absl::Time MakeTime(double secs);
 bool CheckDatetime(const absl::Time& datetime, double secs);
+
+//absl::Status ReturnStatus();
+absl::Status ReturnStatus(absl::StatusCode code, absl::string_view text = "");
 //! @}
 
 //! @defgroup FreeFunction Free function usage.

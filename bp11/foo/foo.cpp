@@ -9,11 +9,10 @@ absl::Status abslFunction(absl::string_view string) {
   std::cout << "Enter " << __func__ << "()" << std::endl;
   // encounter error
   if (string == "error") {
-    return absl::InvalidArgumentError("error");
+    return absl::InternalError(string);
   }
-  // else, return OK
-  return absl::OkStatus();
   std::cout << "Exit " << __func__ << "()" << std::endl;
+  return absl::OkStatus();
 }
 
 absl::Duration MakeDuration(double secs) { return absl::Seconds(secs); }
@@ -35,6 +34,10 @@ absl::Time MakeTime(double secs) {
 
 bool CheckDatetime(const absl::Time& datetime, double secs) {
   return datetime == MakeTime(secs);
+}
+
+absl::Status ReturnStatus(absl::StatusCode code, absl::string_view text) {
+  return absl::Status(code, text);
 }
 
 void freeFunction(int level) {
