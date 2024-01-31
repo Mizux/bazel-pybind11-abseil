@@ -11,6 +11,7 @@ set_target_properties(foo PROPERTIES
 target_link_libraries(foo PUBLIC
   absl::strings
   absl::status
+  absl::time
 )
 add_library(${PROJECT_NAMESPACE}::foo ALIAS foo)
 

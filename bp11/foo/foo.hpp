@@ -5,11 +5,25 @@
 #include <vector>
 #include "absl/strings/string_view.h"
 #include "absl/status/status.h"
+#include "absl/time/time.h"
 
 //! @namespace bp11 The Foo namespace
 namespace bp11 {
 //! @namespace foo The Foo namespace
 namespace foo {
+//! @defgroup AbslFunction Abseil function usage.
+/*! @brief Abseil function in foo namespace.
+ * @param level Scope level.*/
+absl::Status abslFunction(absl::string_view string);
+
+absl::Duration MakeDuration(double secs);
+absl::Duration MakeInfiniteDuration();
+bool IsInfiniteDuration(const absl::Duration& duration);
+bool CheckDuration(const absl::Duration& duration, double secs);
+absl::Time MakeTime(double secs);
+bool CheckDatetime(const absl::Time& datetime, double secs);
+//! @}
+
 //! @defgroup FreeFunction Free function usage.
 //! @{
 /*! @brief Free function in foo namespace.
@@ -18,11 +32,6 @@ void freeFunction(int level);
 /*! @brief Free function in foo namespace.
  * @param level Scope level.*/
 void freeFunction(int64_t level);
-
-//! @defgroup AbslFunction Abseil function usage.
-/*! @brief Abseil function in foo namespace.
- * @param level Scope level.*/
-absl::Status abslFunction(absl::string_view string);
 //! @}
 
 //! @defgroup StringVector Vector of String usage.

@@ -19,6 +19,11 @@ TEST(FooTest, AbslFunction) {
   EXPECT_FALSE(bad.ok());
 }
 
+TEST(FooTest, AbslDuration) {
+  auto hour = MakeDuration(3600);
+  EXPECT_EQ(hour, absl::Hours(1));
+}
+
 TEST(FooTest, StringVectorOutput) {
   std::vector<std::string> result;
   ASSERT_NO_THROW(result = stringVectorOutput(8));
