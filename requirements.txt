@@ -4,6 +4,8 @@
 #
 #    bazel run //:requirements.update
 #
+absl-py==2.0.0
+    # via -r requirements.in
 black==23.7.0
     # via -r requirements.in
 click==8.1.4
