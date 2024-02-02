@@ -9,9 +9,10 @@ absl::Status abslFunction(absl::string_view string) {
   std::cout << "Enter " << __func__ << "()" << std::endl;
   // encounter error
   if (string == "error") {
+    std::cout << "Exit(error) " << __func__ << "()" << std::endl;
     return absl::InternalError(string);
   }
-  std::cout << "Exit " << __func__ << "()" << std::endl;
+  std::cout << "Exit(ok) " << __func__ << "()" << std::endl;
   return absl::OkStatus();
 }
 
