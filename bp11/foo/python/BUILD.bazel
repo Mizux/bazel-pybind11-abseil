@@ -17,7 +17,26 @@ py_test(
     name = "foo_test",
     size = "small",
     srcs = ["foo_test.py"],
+    data = ["@pybind11_abseil//pybind11_abseil:status.so"],
+    deps = [
+      ":pyfoo",
+      "@pybind11_abseil//pybind11_abseil:import_status_module",
+      "@pybind11_abseil//pybind11_abseil:absl_casters",
+      "@pybind11_abseil//pybind11_abseil:status_casters",
+    ],
     python_version = "PY3",
-    deps = [":pyfoo"],
+    srcs_version = "PY3",
     tags = ["unit"],
+)
+
+py_test(
+    name = "status_test",
+    srcs = ["status_test.py"],
+    data = ["@pybind11_abseil//pybind11_abseil:status.so"],
+    deps = [
+      "@pybind11_abseil//pybind11_abseil:import_status_module",
+      "@pybind11_abseil//pybind11_abseil:status_casters",
+    ],
+    python_version = "PY3",
+    srcs_version = "PY3",
 )

@@ -5,10 +5,10 @@ import sys
 import datetime
 from absl.testing import absltest
 
-from pybind11_abseil import status
 import bp11.foo.python as fp
 import bp11.foo.python.pyfoo as fpf
 from bp11.foo.python.pyfoo import Foo
+from pybind11_abseil import status
 
 if __debug__:
     print(f"python path: {sys.path}")
