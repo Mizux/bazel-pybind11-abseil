@@ -1,4 +1,5 @@
 workspace(name = "org_mizux_bazelpybind11abseil")
+
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
 
 # Bazel Extensions
@@ -26,7 +27,7 @@ git_repository(
 
 git_repository(
     name = "rules_python",
-    tag = "0.29.0",
+    tag = "0.31.0",
     remote = "https://github.com/bazelbuild/rules_python.git",
 )
 
@@ -55,6 +56,7 @@ pip_parse(
 load("@pip_deps//:requirements.bzl", install_pip_deps="install_deps")
 install_pip_deps()
 
+## `pybind11_bazel`
 git_repository(
     name = "pybind11_bazel",
     commit = "23926b00e2b2eb2fc46b17e587cf0c0cfd2f2c4b", # 2023/11/29
