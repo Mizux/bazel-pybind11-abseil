@@ -72,7 +72,9 @@ endif()
 
 # Build deps
 option(BUILD_ZLIB "Build the ZLIB dependency Library" ON)
+message(STATUS "Build ZLIB: ${BUILD_zlib}")
 option(BUILD_absl "Build the abseil-cpp dependency Library" ON)
+message(STATUS "Build absl: ${BUILD_absl}")
 
 # Disable CTest targets
 set_property(GLOBAL PROPERTY CTEST_TARGETS_ADDED 1)
