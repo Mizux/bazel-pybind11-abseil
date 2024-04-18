@@ -78,8 +78,13 @@ option(BUILD_absl "Build the abseil-cpp dependency Library" ON)
 set_property(GLOBAL PROPERTY CTEST_TARGETS_ADDED 1)
 include(CTest)
 
-# Build deps
-option(BUILD_googletest "Build the googletest dependency Library" ON)
+if(BUILD_TESTING)
+  option(BUILD_re2 "Build the re2 dependency Library" ON)
+  message(STATUS "Build re2: ${BUILD_re2}")
+
+  option(BUILD_googletest "Build the googletest dependency Library" ON)
+  message(STATUS "Build googletest: ${BUILD_googletest}")
+endif()
 
 option(BUILD_pybind11 "Build pybind11 library" ON)
 message(STATUS "Build pybind11: ${BUILD_pybind11}")

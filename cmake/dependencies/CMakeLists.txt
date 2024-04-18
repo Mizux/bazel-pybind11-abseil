@@ -50,6 +50,24 @@ find_package(Python3 REQUIRED
   COMPONENTS Interpreter Development.Module
   OPTIONAL_COMPONENTS Development.Embed)
 
+# ##############################################################################
+# RE2
+# ##############################################################################
+if(BUILD_re2)
+  message(CHECK_START "Fetching re2")
+  list(APPEND CMAKE_MESSAGE_INDENT "  ")
+  set(RE2_BUILD_TESTING OFF)
+  FetchContent_Declare(
+    re2
+    GIT_REPOSITORY "https://github.com/google/re2.git"
+    GIT_TAG "2024-03-01"
+    #PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/re2-2024-03-01.patch"
+  )
+  FetchContent_MakeAvailable(re2)
+  list(POP_BACK CMAKE_MESSAGE_INDENT)
+  message(CHECK_PASS "fetched")
+endif()
+
 if(BUILD_pybind11)
   message(CHECK_START "Fetching pybind11")
   list(APPEND CMAKE_MESSAGE_INDENT "  ")
@@ -89,10 +107,10 @@ if(BUILD_googletest)
   FetchContent_Declare(
     googletest
     GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG v1.13.0
-    PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/googletest.patch"
-  )
+    GIT_TAG v1.14.0)
   set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+  set(INSTALL_GTEST OFF)
+  set(GTEST_HAS_ABSL ON)
   FetchContent_MakeAvailable(googletest)
   list(POP_BACK CMAKE_MESSAGE_INDENT)
   message(CHECK_PASS "fetched")
