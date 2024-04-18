@@ -12,7 +12,8 @@ ENV CC=gcc CXX=g++
 RUN zypper update -y \
 && zypper install -y \
  python3 python3-devel python3-pip python3-wheel \
- python3-virtualenv \
+ python3-virtualenv python3-setuptools \
+ python3-numpy python3-pandas \
 && zypper clean -a
 RUN python3 -m pip install \
  --break-system-packages \
