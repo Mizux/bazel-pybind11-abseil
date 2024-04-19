@@ -1,5 +1,23 @@
+diff --git a/tools/pybind11Common.cmake b/tools/pybind11Common.cmake
+index 57721aeb..17b48aea 100644
+--- a/tools/pybind11Common.cmake
++++ b/tools/pybind11Common.cmake
+@@ -184,11 +184,13 @@ elseif(
+       ))
+ 
+   # New mode
++  message(STATUS "Should pass here (pybind11NewTools.cmake)")
+   include("${CMAKE_CURRENT_LIST_DIR}/pybind11NewTools.cmake")
+ 
+ else()
+ 
+   # Classic mode
++  message(FATAL_ERROR "Should not pass here")
+   include("${CMAKE_CURRENT_LIST_DIR}/pybind11Tools.cmake")
+ 
+ endif()
 diff --git a/tools/pybind11NewTools.cmake b/tools/pybind11NewTools.cmake
-index 7d7424a7..c007fb01 100644
+index 9fe2eb08..61d54383 100644
 --- a/tools/pybind11NewTools.cmake
 +++ b/tools/pybind11NewTools.cmake
 @@ -23,6 +23,7 @@ else()
