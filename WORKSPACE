@@ -45,6 +45,20 @@ git_repository(
 load("@rules_python//python:repositories.bzl", "py_repositories")
 py_repositories()
 
+load("@rules_python//python:repositories.bzl", "python_register_multi_toolchains")
+DEFAULT_PYTHON = "3.11"
+python_register_multi_toolchains(
+    name = "python",
+    default_version = DEFAULT_PYTHON,
+    python_versions = [
+      "3.12",
+      "3.11",
+      "3.10",
+      "3.9",
+      "3.8"
+    ],
+)
+
 # Create a central external repo, @pip_deps, that contains Bazel targets for all the
 # third-party packages specified in the requirements.txt file.
 load("@rules_python//python:pip.bzl", "pip_parse")
@@ -59,32 +73,23 @@ install_pip_deps()
 ## `pybind11_bazel`
 git_repository(
     name = "pybind11_bazel",
-    commit = "23926b00e2b2eb2fc46b17e587cf0c0cfd2f2c4b", # 2023/11/29
-    patches = ["//patches:pybind11_bazel.patch"],
-    patch_args = ["-p1"],
+    tag = "v2.12.0",
     remote = "https://github.com/pybind/pybind11_bazel.git",
 )
 
 new_git_repository(
     name = "pybind11",
-    build_file = "@pybind11_bazel//:pybind11.BUILD",
-    tag = "v2.11.1",
+    build_file = "@pybind11_bazel//:pybind11-BUILD.bazel",
+    tag = "v2.12.0",
     remote = "https://github.com/pybind/pybind11.git",
 )
 
 new_git_repository(
     name = "pybind11_abseil",
-    commit = "52f27398876a3177049977249e004770bd869e61", # 2024/01/11
+    commit = "01171e9dfff80a43bbeb52020a4628267614f275", # 2024/04/01
     patches = ["//patches:pybind11_abseil.patch"],
     patch_args = ["-p1"],
     remote = "https://github.com/pybind/pybind11_abseil.git",
-)
-
-load("@pybind11_bazel//:python_configure.bzl", "python_configure")
-python_configure(name = "local_config_python", python_version = "3")
-bind(
-    name = "python_headers",
-    actual = "@local_config_python//:python_headers",
 )
 
 ## Testing
