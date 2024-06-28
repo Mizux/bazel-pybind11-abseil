@@ -34,9 +34,7 @@ py_test(
 py_test(
     name = "status_test",
     srcs = ["status_test.py"],
-    data = [
-      "@pybind11_abseil//pybind11_abseil:status",
-    ],
+    data = ["@pybind11_abseil//pybind11_abseil:status.so"],
     deps = [
       requirement("absl-py"),
     ],

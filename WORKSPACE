@@ -15,7 +15,7 @@ bazel_skylib_workspace()
 ## Bazel rules.
 git_repository(
     name = "platforms",
-    tag = "0.0.8",
+    tag = "0.0.9",
     remote = "https://github.com/bazelbuild/platforms.git",
 )
 
@@ -27,7 +27,7 @@ git_repository(
 
 git_repository(
     name = "rules_python",
-    tag = "0.31.0",
+    tag = "0.33.2",
     remote = "https://github.com/bazelbuild/rules_python.git",
 )
 
@@ -35,8 +35,8 @@ git_repository(
 ## Abseil-cpp
 git_repository(
     name = "com_google_absl",
-    tag = "20240116.1",
-    patches = ["//patches:abseil-cpp-20240116.1.patch"],
+    tag = "20240116.2",
+    patches = ["//patches:abseil-cpp-20240116.2.patch"],
     patch_args = ["-p1"],
     remote = "https://github.com/abseil/abseil-cpp.git",
 )
@@ -57,6 +57,7 @@ python_register_multi_toolchains(
       "3.9",
       "3.8"
     ],
+    ignore_root_user_error=True,
 )
 
 # Create a central external repo, @pip_deps, that contains Bazel targets for all the
@@ -73,24 +74,35 @@ install_pip_deps()
 ## `pybind11_bazel`
 git_repository(
     name = "pybind11_bazel",
-    tag = "v2.12.0",
+    tag = "v2.12.0", # 2024/04/08
+    #commit = "23926b00e2b2eb2fc46b17e587cf0c0cfd2f2c4b", # 2023/11/29
+    #patches = ["//patches:pybind11_bazel.patch"],
+    #patch_args = ["-p1"],
     remote = "https://github.com/pybind/pybind11_bazel.git",
 )
 
 new_git_repository(
     name = "pybind11",
     build_file = "@pybind11_bazel//:pybind11-BUILD.bazel",
-    tag = "v2.12.0",
+    #build_file = "@pybind11_bazel//:pybind11.BUILD",
+    tag = "v2.13.1",
     remote = "https://github.com/pybind/pybind11.git",
 )
 
 new_git_repository(
     name = "pybind11_abseil",
-    commit = "01171e9dfff80a43bbeb52020a4628267614f275", # 2024/04/01
+    tag = "v202402.0",
     patches = ["//patches:pybind11_abseil.patch"],
     patch_args = ["-p1"],
     remote = "https://github.com/pybind/pybind11_abseil.git",
 )
+
+#load("@pybind11_bazel//:python_configure.bzl", "python_configure")
+#python_configure(name = "local_config_python", python_version = "3")
+#bind(
+#    name = "python_headers",
+#    actual = "@local_config_python//:python_headers",
+#)
 
 ## Testing
 git_repository(

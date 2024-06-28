@@ -12,10 +12,11 @@ set(CMAKE_Fortran_COMPILER OFF)
 if(BUILD_ZLIB)
   message(CHECK_START "Fetching ZLIB")
   list(APPEND CMAKE_MESSAGE_INDENT "  ")
+  set(ZLIB_BUILD_EXAMPLES OFF)
   FetchContent_Declare(
     zlib
     GIT_REPOSITORY "https://github.com/madler/ZLIB.git"
-    GIT_TAG "v1.2.13"
+    GIT_TAG "v1.3.1"
     PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/ZLIB.patch")
   FetchContent_MakeAvailable(zlib)
   list(POP_BACK CMAKE_MESSAGE_INDENT)
@@ -33,12 +34,12 @@ if(BUILD_absl)
   set(ABSL_PROPAGATE_CXX_STD ON)
   set(ABSL_BUILD_TESTING OFF)
   FetchContent_Declare(
-    abseil-cpp
+    absl
     GIT_REPOSITORY "https://github.com/abseil/abseil-cpp.git"
-    GIT_TAG "20240116.1"
-    PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/abseil-cpp-20240116.1.patch"
+    GIT_TAG "20240116.2"
+    PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/abseil-cpp-20240116.2.patch"
   )
-  FetchContent_MakeAvailable(abseil-cpp)
+  FetchContent_MakeAvailable(absl)
   list(POP_BACK CMAKE_MESSAGE_INDENT)
   message(CHECK_PASS "fetched")
 endif()
@@ -59,8 +60,8 @@ if(BUILD_re2)
   FetchContent_Declare(
     re2
     GIT_REPOSITORY "https://github.com/google/re2.git"
-    GIT_TAG "2024-03-01"
-    #PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/re2-2024-03-01.patch"
+    GIT_TAG "2024-04-01"
+    #PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/re2-2024-04-01.patch"
   )
   FetchContent_MakeAvailable(re2)
   list(POP_BACK CMAKE_MESSAGE_INDENT)
@@ -76,8 +77,8 @@ if(BUILD_pybind11)
   FetchContent_Declare(
     pybind11
     GIT_REPOSITORY "https://github.com/pybind/pybind11.git"
-    GIT_TAG "v2.12.0"
-    #PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/pybind11.patch"
+    GIT_TAG "v2.13.1"
+    PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/pybind11.patch"
   )
   FetchContent_MakeAvailable(pybind11)
   list(POP_BACK CMAKE_MESSAGE_INDENT)
@@ -89,8 +90,8 @@ if(BUILD_pybind11_abseil)
   list(APPEND CMAKE_MESSAGE_INDENT "  ")
   FetchContent_Declare(
     pybind11_abseil
-    GIT_REPOSITORY "https://github.com/pybind/pybind11_abseil.git" # 2024/04/01
-    GIT_TAG "01171e9dfff80a43bbeb52020a4628267614f275"
+    GIT_REPOSITORY "https://github.com/pybind/pybind11_abseil.git" # 2024/01/11
+    GIT_TAG "v202402.0"
     PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/pybind11_abseil.patch"
   )
   FetchContent_MakeAvailable(pybind11_abseil)
