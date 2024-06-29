@@ -1,22 +1,21 @@
 # Create a virtual environment with all tools installed
-# ref: https://hub.docker.com/r/opensuse/tumbleweed
-FROM opensuse/tumbleweed AS env
+# ref: https://hub.docker.com/_/almalinux
+FROM almalinux:latest AS env
 # Install system build dependencies
 ENV PATH=/usr/local/bin:$PATH
-RUN zypper update -y \
-&& zypper install -y git patch gcc gcc-c++ cmake \
-&& zypper clean -a
-ENV CC=gcc CXX=g++
+RUN dnf -y update \
+&& dnf -y install git wget openssl-devel cmake \
+&& dnf -y groupinstall "Development Tools" \
+&& dnf clean all \
+&& rm -rf /var/cache/dnf
+CMD [ "/usr/bin/bash" ]
 
 # Install Python
-RUN zypper update -y \
-&& zypper install -y \
- python3 python3-devel python3-pip python3-wheel \
- python3-virtualenv python3-setuptools \
- python3-numpy python3-pandas \
-&& zypper clean -a
+RUN dnf -y update \
+&& dnf -y install python3-devel python3-pip \
+&& dnf clean all \
+&& rm -rf /var/cache/dnf
 RUN python3 -m pip install \
- --break-system-packages \
  absl-py mypy
 
 # Add the library src to our build env
@@ -36,9 +35,7 @@ RUN cmake --build build --target test -v
 # Test install rules
 FROM env AS install_env
 COPY --from=build /home/project/build/python/dist/*.whl ./
-RUN python3 -m pip install \
- --break-system-packages \
- --find-links=. \
+RUN python3 -m pip install --find-links=. \
  bp11*.whl
 
 FROM install_env AS install_devel
