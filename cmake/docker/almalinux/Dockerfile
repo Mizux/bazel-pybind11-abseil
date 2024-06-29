@@ -1,7 +1,6 @@
 # Create a virtual environment with all tools installed
-# ref: https://hub.docker.com/_/rockylinux
-FROM rockylinux:9 AS env
-
+# ref: https://hub.docker.com/_/almalinux
+FROM almalinux:latest AS env
 # Install system build dependencies
 ENV PATH=/usr/local/bin:$PATH
 RUN dnf -y update \
@@ -13,7 +12,7 @@ CMD [ "/usr/bin/bash" ]
 
 # Install Python
 RUN dnf -y update \
-&& dnf -y install python3-devel python3-pip python3-wheel \
+&& dnf -y install python3-devel python3-pip \
 && dnf clean all \
 && rm -rf /var/cache/dnf
 RUN python3 -m pip install \
