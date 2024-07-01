@@ -3,15 +3,22 @@ common --noenable_bzlmod
 # Sets the default Apple platform to macOS.
 build --apple_platform_type=macos
 
-# By default, build in C++ 20 mode.
+# By default, build in C++ 20 mode,
+# with various extra flags per platform.
 build --enable_platform_specific_config
 
-build:linux --cxxopt="-std=c++20"
-build:linux --host_cxxopt="-std=c++20"
-build:macos --cxxopt="-std=c++20" --features=-supports_dynamic_linker
-build:macos --host_cxxopt="-std=c++20" --features=-supports_dynamic_linker
+build:linux --cxxopt="-std=c++20" --cxxopt=-Wno-sign-compare
+build:linux --host_cxxopt="-std=c++20" --host_cxxopt=-Wno-sign-compare
+build:macos --cxxopt="-std=c++20" --cxxopt=-Wno-sign-compare --cxxopt=-mmacos-version-min=10.15 --cxxopt=-Wno-dangling-field --features=-supports_dynamic_linker
+build:macos --host_cxxopt="-std=c++20" --host_cxxopt=-Wno-sign-compare --host_cxxopt=-mmacos-version-min=10.15 --host_cxxopt=-Wno-dangling-field --features=-supports_dynamic_linker
 build:windows --cxxopt="/std:c++20"
 build:windows --host_cxxopt="/std:c++20"
+
+# Pybind11_abseil status path
+#build:linux --cxxopt="-DPYBIND11_ABSEIL_STATUS_MODULE_PATH=pybind11_abseil.pybind11_abseil.status"
+#build:linux --host_cxxopt="-DPYBIND11_ABSEIL_STATUS_MODULE_PATH=pybind11_abseil.pybind11_abseil.status"
+build:macos --cxxopt="-DPYBIND11_ABSEIL_STATUS_MODULE_PATH=status"
+build:windows --cxxopt="/DPYBIND11_ABSEIL_STATUS_MODULE_PATH=status"
 
 # Print command lines for build commands.
 # build --subcommands=pretty_print
