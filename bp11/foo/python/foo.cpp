@@ -16,6 +16,7 @@ namespace py = pybind11;
 //PYBIND11_MAKE_OPAQUE(std::vector<std::vector<std::pair<int, int>>>);
 
 PYBIND11_MODULE(pyfoo, m) {
+    //pybind11::google::ImportStatusModule();
     m.doc() = "pyfoo module"; // optional module docstring
 
     // Absl function
