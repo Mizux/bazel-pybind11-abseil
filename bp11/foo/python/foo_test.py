@@ -5,10 +5,7 @@ import sys
 import datetime
 from absl.testing import absltest
 
-print(sys.path)
-#from pybind11_abseil.pybind11_abseil import status
-import status
-#from pybind11_abseil import status
+from pybind11_abseil import status
 
 import bp11.foo.python as fp
 import bp11.foo.python.pyfoo as fpf

@@ -90,7 +90,7 @@ new_git_repository(
 )
 
 new_git_repository(
-    name = "pybind11_abseil",
+    name = "org_pybind11_abseil",
     tag = "v202402.0",
     patches = ["//patches:pybind11_abseil.patch"],
     patch_args = ["-p1"],
