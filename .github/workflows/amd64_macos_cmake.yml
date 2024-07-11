@@ -31,7 +31,7 @@ jobs:
         run: |
           echo "$HOME/Library/Python/${{ matrix.python.version }}/bin" >> $GITHUB_PATH
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-      - name: Check cmake
+      - name: Check CMake
         run: cmake --version
       - name: Configure
         run: >

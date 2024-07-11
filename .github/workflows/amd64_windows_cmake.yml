@@ -23,7 +23,7 @@ jobs:
         run: python3 -m pip install --user mypy mypy-protobuf absl-py setuptools wheel numpy pandas
       - name: Add Python binaries to path
         run: echo "$((Get-Item ~).FullName)/AppData/Roaming/Python/Python311/Scripts" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-      - name: Check cmake
+      - name: Check CMake
         run: |
           cmake --version
           cmake -G || true
