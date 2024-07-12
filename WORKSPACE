@@ -89,7 +89,7 @@ new_git_repository(
 
 new_git_repository(
     name = "org_pybind11_abseil",
-    commit = "01171e9dfff80a43bbeb52020a4628267614f275", # 2024/04/01
+    tag = "v202402.0",
     patches = ["//patches:pybind11_abseil.patch"],
     patch_args = ["-p1"],
     remote = "https://github.com/pybind/pybind11_abseil.git",

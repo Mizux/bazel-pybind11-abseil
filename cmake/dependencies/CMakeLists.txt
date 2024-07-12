@@ -90,7 +90,7 @@ if(BUILD_pybind11_abseil)
   list(APPEND CMAKE_MESSAGE_INDENT "  ")
   FetchContent_Declare(
     pybind11_abseil
-    GIT_REPOSITORY "https://github.com/pybind/pybind11_abseil.git" # 2024/01/11
+    GIT_REPOSITORY "https://github.com/pybind/pybind11_abseil.git"
     GIT_TAG "v202402.0"
     PATCH_COMMAND git apply --ignore-whitespace "${CMAKE_CURRENT_LIST_DIR}/../../patches/pybind11_abseil.patch"
   )
