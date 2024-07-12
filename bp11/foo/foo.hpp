@@ -13,6 +13,7 @@ namespace bp11 {
 namespace foo {
 
 //! @defgroup AbslFunction Abseil function usage.
+//! @{
 //! @brief Abseil function in foo namespace.
 absl::Status abslFunction(absl::string_view string);
 

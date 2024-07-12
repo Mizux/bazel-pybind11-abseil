@@ -5,7 +5,6 @@
 #include "pybind11_abseil/absl_casters.h"
 #include "pybind11_abseil/status_casters.h"
 
-
 #include "bp11/foo/foo.hpp"
 
 namespace py = pybind11;
