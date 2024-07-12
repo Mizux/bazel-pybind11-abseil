@@ -72,7 +72,7 @@ endif()
 
 # Build deps
 option(BUILD_ZLIB "Build the ZLIB dependency Library" ON)
-message(STATUS "Build ZLIB: ${BUILD_zlib}")
+message(STATUS "Build ZLIB: ${BUILD_ZLIB}")
 option(BUILD_absl "Build the abseil-cpp dependency Library" ON)
 message(STATUS "Build absl: ${BUILD_absl}")
 
@@ -83,9 +83,13 @@ include(CTest)
 if(BUILD_TESTING)
   option(BUILD_re2 "Build the re2 dependency Library" ON)
   message(STATUS "Build re2: ${BUILD_re2}")
+endif()
 
+if(BUILD_TESTING)
   option(BUILD_googletest "Build the googletest dependency Library" ON)
   message(STATUS "Build googletest: ${BUILD_googletest}")
+else()
+  set(BUILD_googletest OFF)
 endif()
 
 option(BUILD_pybind11 "Build pybind11 library" ON)
