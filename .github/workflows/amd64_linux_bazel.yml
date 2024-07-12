@@ -50,4 +50,5 @@ jobs:
           bazel test
           -c opt
           --test_output=all
-          //bp11/... //pure_lib/...
+          ...
+          -- -//:requirements_test
