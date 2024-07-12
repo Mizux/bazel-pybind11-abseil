@@ -7,8 +7,9 @@ RUN pacman -Syu --noconfirm git base-devel cmake
 
 # Install Python
 RUN pacman -Syu --noconfirm \
- python python-pip python-wheel python-setuptools \
- python-virtualenv
+ python python-pip \
+ python-wheel python-virtualenv python-setuptools \
+ python-numpy python-pandas
 RUN python3 -m pip install --break-system-package \
  absl-py mypy
 

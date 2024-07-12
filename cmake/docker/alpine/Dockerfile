@@ -8,7 +8,8 @@ RUN apk add --no-cache git build-base linux-headers cmake
 # Install Python
 RUN apk add --no-cache \
  python3-dev py3-pip py3-wheel \
- py3-virtualenv
+ py3-virtualenv \
+ py3-numpy py3-pandas
 RUN python3 -m pip install --break-system-package \
  absl-py mypy
 
