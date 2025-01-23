@@ -20,7 +20,6 @@ SUPPORTED_PYTHON_VERSIONS = [
     "3.11",
     "3.10",
     "3.9",
-    "3.8",
 ]
 
 DEFAULT_PYTHON = "3.11"
@@ -42,11 +41,11 @@ pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip", dev_depen
 
 [
     pip.parse(
-        hub_name = "pypi",
+        hub_name = "pypi_bp11_absl",
         python_version = version,
-        requirements_lock = "//pybind11_abseil/requirements:requirements_lock_" + version.replace(".", "_") + ".txt",
+        requirements_lock = "//bazel:requirements_lock_" + version.replace(".", "_") + ".txt",
     )
     for version in SUPPORTED_PYTHON_VERSIONS
 ]
 
-use_repo(pip, "pypi")
+use_repo(pip, pypi = "pypi_bp11_absl")

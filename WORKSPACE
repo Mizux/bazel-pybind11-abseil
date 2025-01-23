@@ -40,12 +40,14 @@ git_repository(
     remote = "https://github.com/abseil/abseil-cpp.git",
 )
 
-## Python
-load("@rules_python//python:repositories.bzl", "py_repositories")
+load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_multi_toolchains")
 py_repositories()
 
-load("@rules_python//python:repositories.bzl", "python_register_multi_toolchains")
+load("@rules_python//python/pip_install:repositories.bzl", "pip_install_dependencies")
+pip_install_dependencies()
+
 DEFAULT_PYTHON = "3.11"
+
 python_register_multi_toolchains(
     name = "python",
     default_version = DEFAULT_PYTHON,
@@ -54,21 +56,30 @@ python_register_multi_toolchains(
       "3.11",
       "3.10",
       "3.9",
-      "3.8"
     ],
-    ignore_root_user_error=True,
 )
 
-# Create a central external repo, @pip_deps, that contains Bazel targets for all the
-# third-party packages specified in the requirements.txt file.
-load("@rules_python//python:pip.bzl", "pip_parse")
-pip_parse(
-   name = "pip_deps",
-   requirements_lock = "//:requirements.txt",
+load("@python//:pip.bzl", "multi_pip_parse")
+
+multi_pip_parse(
+    name = "pypi",
+    default_version = DEFAULT_PYTHON,
+    python_interpreter_target = {
+        "3.12": "@python_3_12_host//:python",
+        "3.11": "@python_3_11_host//:python",
+        "3.10": "@python_3_10_host//:python",
+        "3.9": "@python_3_9_host//:python",
+    },
+    requirements_lock = {
+        "3.12": "//bazel:requirements_lock_3_12.txt",
+        "3.11": "//bazel:requirements_lock_3_11.txt",
+        "3.10": "//bazel:requirements_lock_3_10.txt",
+        "3.9": "//bazel:requirements_lock_3_9.txt",
+    },
 )
 
-load("@pip_deps//:requirements.bzl", install_pip_deps="install_deps")
-install_pip_deps()
+load("@pypi//:requirements.bzl", "install_deps")
+install_deps()
 
 ## `pybind11_bazel`
 git_repository(

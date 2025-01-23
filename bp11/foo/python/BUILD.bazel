@@ -1,7 +1,9 @@
 # Python wrapper for foo library.
 load("@rules_python//python:defs.bzl", "py_test")
+
 load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
-load("@pip_deps//:requirements.bzl", "requirement")
+
+load("@pypi//:requirements.bzl", "requirement")
 
 pybind_extension(
     name = "pyfoo",
