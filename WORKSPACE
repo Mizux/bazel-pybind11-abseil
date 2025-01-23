@@ -1,4 +1,4 @@
-workspace(name = "org_mizux_bazelpybind11abseil")
+workspace(name = "mizux_bp11_absl")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
 
 # Bazel Extensions
