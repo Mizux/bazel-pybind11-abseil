@@ -10,9 +10,9 @@ pybind_extension(
     srcs = ["foo.cpp"],
     deps = [
         "//bp11/foo:foo",
-        "@org_pybind11_abseil//pybind11_abseil:import_status_module",
-        "@org_pybind11_abseil//pybind11_abseil:absl_casters",
-        "@org_pybind11_abseil//pybind11_abseil:status_casters",
+        "@pybind11_abseil//pybind11_abseil:import_status_module",
+        "@pybind11_abseil//pybind11_abseil:absl_casters",
+        "@pybind11_abseil//pybind11_abseil:status_casters",
     ],
 )
 
@@ -23,7 +23,7 @@ py_test(
     deps = [
       ":pyfoo",
       requirement("absl-py"),
-      "@org_pybind11_abseil//pybind11_abseil:status",
+        "@pybind11_abseil//pybind11_abseil:status",
     ],
     imports = [
       "../../../../org_pybind11_abseil",
@@ -38,7 +38,7 @@ py_test(
     srcs = ["status_test.py"],
     deps = [
       requirement("absl-py"),
-      "@org_pybind11_abseil//pybind11_abseil:status",
+        "@pybind11_abseil//pybind11_abseil:status",
     ],
     imports = [
       "../../../../org_pybind11_abseil",

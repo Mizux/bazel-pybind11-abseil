@@ -11,6 +11,15 @@ bazel_dep(name = "platforms", version = "0.0.10")
 bazel_dep(name = "rules_cc", version = "0.0.16")
 bazel_dep(name = "rules_python", version = "0.40.0")
 bazel_dep(name = "pybind11_bazel", version = "2.13.6")
+bazel_dep(name = "pybind11_abseil", version = "202402.0")
+
+git_override(
+    module_name = "pybind11_abseil",
+    commit = "70f8b693b3b70573ca785ef62d9f48054f45d786",
+    patch_strip = 1,
+    patches = ["//patches:pybind11_abseil.patch"],
+    remote = "https://github.com/pybind/pybind11_abseil.git",
+)
 
 #### DEV ONLY DEPENDENCIES BELOW HERE ####
 bazel_dep(name = "googletest", version = "1.15.2")
