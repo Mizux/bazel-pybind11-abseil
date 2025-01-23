@@ -1,4 +1,4 @@
-pybind11_add_module(foo_pybind11 SHARED foo.cpp)
+pybind11_add_module(foo_pybind11 MODULE foo.cpp)
 set_target_properties(foo_pybind11 PROPERTIES
   LIBRARY_OUTPUT_NAME "pyfoo")
 # note: macOS is APPLE and also UNIX !

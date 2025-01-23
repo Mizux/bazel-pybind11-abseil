@@ -27,7 +27,6 @@ py_test(
       "../../../../org_pybind11_abseil",
     ],
     python_version = "PY3",
-    srcs_version = "PY3",
     tags = ["unit"],
 )
 
