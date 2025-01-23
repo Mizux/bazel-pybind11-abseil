@@ -2,9 +2,7 @@
 cmake_minimum_required(VERSION 3.18)
 
 # Find Python 3
-find_package(Python3 REQUIRED
-  COMPONENTS Interpreter Development.Module
-  OPTIONAL_COMPONENTS Development.Embed)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development.Module)
 
 # Find if the python module is available,
 # otherwise install it (PACKAGE_NAME) to the Python3 user install directory.
@@ -104,7 +102,6 @@ message(STATUS "Python project build path: ${PYTHON_PROJECT_DIR}")
 #######################
 #file(MAKE_DIRECTORY python/${PYTHON_PROJECT})
 file(GENERATE OUTPUT ${PYTHON_PROJECT_DIR}/__init__.py CONTENT "__version__ = \"${PROJECT_VERSION}\"\n")
-
 file(GENERATE OUTPUT ${PYTHON_PROJECT_DIR}/foo/__init__.py CONTENT "")
 file(GENERATE OUTPUT ${PYTHON_PROJECT_DIR}/foo/python/__init__.py CONTENT "")
 
