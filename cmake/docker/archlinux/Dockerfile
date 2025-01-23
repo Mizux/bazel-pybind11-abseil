@@ -8,8 +8,8 @@ RUN pacman -Syu --noconfirm git base-devel cmake
 
 # Install Python
 RUN pacman -Syu --noconfirm \
- python python-pip \
- python-wheel python-virtualenv python-setuptools \
+ python python-pip python-wheel python-setuptools \
+ python-virtualenv \
  python-numpy python-pandas
 RUN python3 -m pip install --break-system-package \
  absl-py mypy
@@ -26,7 +26,7 @@ RUN cmake --build build --target all -v
 RUN cmake --build build --target install -v
 
 FROM build AS test
-RUN cmake --build build --target test -v
+RUN CTEST_OUTPUT_ON_FAILURE=1 cmake --build build --target test -v
 
 # Test install rules
 FROM env AS install_env
@@ -41,7 +41,7 @@ WORKDIR /home/samples
 COPY cmake/samples .
 
 FROM install_devel AS install_build
-RUN python3 sample.py
+RUN python3 -m compileall .
 
 FROM install_build AS install_test
 RUN python3 sample.py

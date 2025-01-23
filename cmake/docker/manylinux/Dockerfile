@@ -1,28 +1,27 @@
-# To build it on x86_64 please read
-# https://github.com/multiarch/qemu-user-static#getting-started
-# Create a virtual environment with all tools installed
 # ref: https://github.com/pypa/manylinux
-FROM quay.io/pypa/manylinux2014_aarch64:latest AS env
+FROM quay.io/pypa/manylinux_2_28_x86_64:latest AS env
+# note: Almalinux:8 based image with
+# CMake 3.31.2 and SWIG 4.3.0 already installed
 
 # Install system build dependencies
-ENV PATH=/usr/local/bin:$PATH
-RUN yum -y update \
-&& yum -y install git wget openssl-devel \
-&& yum -y groupinstall "Development Tools" \
-&& yum clean all \
-&& rm -rf /var/cache/yum
-
-# Install CMake 3.26.4
-RUN wget --no-check-certificate "https://cmake.org/files/v3.26/cmake-3.26.4-linux-aarch64.sh" \
-&& chmod a+x cmake-3.26.4-linux-aarch64.sh \
-&& ./cmake-3.26.4-linux-aarch64.sh --prefix=/usr/local/ --skip-license \
-&& rm cmake-3.26.4-linux-aarch64.sh
+RUN dnf -y update \
+&& dnf -y install \
+ curl wget \
+ git patch \
+ which pkgconfig autoconf libtool \
+ make gcc-c++ \
+ redhat-lsb openssl-devel pcre2-devel \
+ zlib-devel unzip zip \
+&& dnf clean all \
+&& rm -rf /var/cache/dnf
+ENTRYPOINT ["/usr/bin/bash", "-c"]
+CMD ["/usr/bin/bash"]
 
 # Add the library src to our build env
 FROM env AS devel
 WORKDIR /home/project
 COPY . .
-COPY ./ci/docker/arm64v8/manylinux/build-manylinux.sh .
+COPY ./cmake/docker/manylinux/build-manylinux.sh .
 
 FROM devel AS build
 RUN ./build-manylinux.sh build
@@ -30,17 +29,22 @@ RUN ./build-manylinux.sh build
 FROM build AS test
 RUN ./build-manylinux.sh test
 
-FROM env AS install_env
-COPY --from=build /home/project/build*/python/dist/*.whl ./
-RUN python3 -m pip install --find-links=. \
- bp11*.whl
+FROM ubuntu:latest AS install_env
+RUN apt update -q \
+&& apt install -yq python3-dev python3-pip \
+&& apt clean \
+&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+COPY --from=build /home/project/build*/python/dist/bp11*-manylinux*.whl ./
+RUN python3 -m pip install --break-system-packages --find-links=. bp11
+RUN python3 -m pip show bp11
 
 FROM install_env AS install_devel
 WORKDIR /home/sample
-COPY ci/samples .
+COPY cmake/samples .
 
 FROM install_devel AS install_build
-RUN python3 sample.py
+RUN python3 -m compileall .
 
 FROM install_build AS install_test
 RUN python3 sample.py
