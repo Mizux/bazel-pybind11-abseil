@@ -1,11 +1,13 @@
-'''MyLib module '''
+"""MyLib module """
 
 import sys
 
+
 def free_function(i=42):
-    print(f'free_function')
-    print(f'version_info: {sys.version_info}')
+    print(f"free_function")
+    print(f"version_info: {sys.version_info}")
     return i
+
 
 class MyLib:
     """A simple example class"""
