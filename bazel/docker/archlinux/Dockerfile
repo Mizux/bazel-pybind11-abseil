@@ -26,5 +26,4 @@ RUN bazel test \
  -c opt \
  --test_output=errors \
  --enable_bzlmod \
- ... \
- -- -//:requirements_test
+ ...
