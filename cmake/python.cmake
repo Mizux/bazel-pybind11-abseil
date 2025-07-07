@@ -266,7 +266,7 @@ endif()
 # Parameters:
 #  the python filename
 # e.g.:
-# add_python_test(foo.py)
+# add_python_test(foo_test.py)
 function(add_python_test FILE_NAME)
   message(STATUS "Configuring test ${FILE_NAME} ...")
   get_filename_component(EXAMPLE_NAME ${FILE_NAME} NAME_WE)
