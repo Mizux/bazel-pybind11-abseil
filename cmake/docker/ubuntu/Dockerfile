@@ -20,7 +20,9 @@ RUN apt update -q \
 && apt clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN python3 -m pip install --break-system-package \
- absl-py numpy pandas mypy
+ numpy pandas
+RUN python3 -m pip install --break-system-package \
+ absl-py mypy
 
 FROM env AS devel
 WORKDIR /home/project
