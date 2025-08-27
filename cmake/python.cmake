@@ -146,13 +146,13 @@ add_custom_command(
   COMMAND_EXPAND_LISTS)
 
 add_custom_command(
-  OUTPUT python/pybind11_timestamp
-  COMMAND ${CMAKE_COMMAND} -E remove -f pybind11_timestamp
+  OUTPUT python/foo_pybind11_timestamp
+  COMMAND ${CMAKE_COMMAND} -E remove -f foo_pybind11_timestamp
   COMMAND ${CMAKE_COMMAND} -E copy
     $<TARGET_FILE:foo_pybind11> ${PYTHON_PROJECT}/foo/python
   COMMAND ${CMAKE_COMMAND} -E copy
    $<TARGET_FILE:status_py_extension_stub> ${PYTHON_PROJECT}/../pybind11_abseil
-  COMMAND ${CMAKE_COMMAND} -E touch ${PROJECT_BINARY_DIR}/python/pybind11_timestamp
+  COMMAND ${CMAKE_COMMAND} -E touch ${PROJECT_BINARY_DIR}/python/foo_pybind11_timestamp
   MAIN_DEPENDENCY
     python/setup.py.in
   DEPENDS
@@ -186,7 +186,7 @@ add_custom_command(
     python/setup.py.in
   DEPENDS
     python/foo_timestamp
-    python/pybind11_timestamp
+    python/foo_pybind11_timestamp
   WORKING_DIRECTORY python
   COMMAND_EXPAND_LISTS)
 endif()
@@ -210,7 +210,7 @@ add_custom_command(
   DEPENDS
     python/setup.py
     python/foo_timestamp
-    python/pybind11_timestamp
+    python/foo_pybind11_timestamp
     $<$<BOOL:${GENERATE_PYTHON_STUB}>:python/stub_timestamp>
   BYPRODUCTS
     python/${PYTHON_PROJECT}

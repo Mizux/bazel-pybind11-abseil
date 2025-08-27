@@ -12,19 +12,23 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_r
 # Needed for Abseil.
 git_repository(
     name = "bazel_skylib",
-    commit = "27d429d8d036af3d010be837cc5924de1ca8d163",
-    #tag = "1.7.1",
+    tag = "1.8.1",
     remote = "https://github.com/bazelbuild/bazel-skylib.git",
 )
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 bazel_skylib_workspace()
 
-## Bazel rules...
+## Bazel rules.
 git_repository(
     name = "platforms",
-    commit = "05ec3a3df23fde62471f8288e344cc021dd87bab",
-    #tag = "0.0.10",
+    tag = "1.0.0",
     remote = "https://github.com/bazelbuild/platforms.git",
+)
+
+git_repository(
+    name = "rules_cc",
+    tag = "0.1.4",
+    remote = "https://github.com/bazelbuild/rules_cc.git",
 )
 
 ## abseil-cpp
@@ -48,11 +52,12 @@ http_archive(
 
 git_repository(
     name = "rules_python",
-    commit = "1944874f6ba507f70d8c5e70df84622e0c783254",
-    #tag = "0.40.0",
+    tag = "1.5.1",
     remote = "https://github.com/bazelbuild/rules_python.git",
 )
 
+# Dependencies
+## Python
 load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_multi_toolchains")
 py_repositories()
 
@@ -60,7 +65,6 @@ load("@rules_python//python/pip_install:repositories.bzl", "pip_install_dependen
 pip_install_dependencies()
 
 DEFAULT_PYTHON = "3.11"
-
 python_register_multi_toolchains(
     name = "python",
     default_version = DEFAULT_PYTHON,
@@ -70,6 +74,7 @@ python_register_multi_toolchains(
       "3.10",
       "3.9",
     ],
+    ignore_root_user_error=True,
 )
 
 load("@python//:pip.bzl", "multi_pip_parse")
@@ -98,8 +103,7 @@ install_deps()
 # https://github.com/pybind/pybind11_bazel
 git_repository(
     name = "pybind11_bazel",
-    commit = "2b6082a4d9d163a52299718113fa41e4b7978db5",
-    #tag = "v2.13.6", # 2024/10/21
+    tag = "v2.13.6", # 2024/04/08
     remote = "https://github.com/pybind/pybind11_bazel.git",
 )
 
@@ -124,6 +128,6 @@ new_git_repository(
 ## Testing
 git_repository(
     name = "googletest",
-    tag = "v1.14.0",
+    tag = "v1.17.0",
     remote = "https://github.com/google/googletest.git",
 )

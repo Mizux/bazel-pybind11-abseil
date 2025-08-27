@@ -91,6 +91,7 @@ if(BUILD_TESTING)
 else()
   set(BUILD_googletest OFF)
 endif()
+message(STATUS "Build googletest: ${BUILD_googletest}")
 
 option(BUILD_pybind11 "Build pybind11 library" ON)
 message(STATUS "Build pybind11: ${BUILD_pybind11}")
