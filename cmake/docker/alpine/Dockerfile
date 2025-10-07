@@ -4,14 +4,11 @@ FROM alpine:edge AS env
 
 # Install system build dependencies
 ENV PATH=/usr/local/bin:$PATH
-RUN apk add --no-cache git build-base linux-headers cmake
-
-# Install Python
 RUN apk add --no-cache \
- python3-dev py3-pip py3-wheel \
- py3-virtualenv \
- py3-numpy py3-pandas
-RUN python3 -m pip install --break-system-package \
+ git build-base linux-headers cmake \
+ python3-dev py3-pip py3-wheel py3-virtualenv
+RUN rm -f /usr/lib/python3.*/EXTERNALLY-MANAGED \
+&& python3 -m pip install \
  absl-py mypy
 
 # Add the library src to our build env

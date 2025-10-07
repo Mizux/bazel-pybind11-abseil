@@ -4,20 +4,21 @@ FROM debian:latest AS env
 
 # Install system build dependencies
 ENV PATH=/usr/local/bin:$PATH
-RUN apt-get update -qq \
-&& apt-get install -yq git wget libssl-dev build-essential cmake \
-&& apt-get clean \
+RUN apt update -qq \
+&& apt install -yq \
+ git wget libssl-dev \
+ build-essential cmake \
+&& apt clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install Python
-RUN apt-get update -qq \
-&& apt-get install -yq \
- python3-dev python3-pip python3-wheel \
+RUN apt update -qq \
+&& apt install -yq \
+ python3-dev python3-pip \
  python3-venv python3-virtualenv \
-&& apt-get clean \
+ python3-setuptools python3-wheel \
+&& apt clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN python3 -m pip install --break-system-package \
- numpy pandas
 RUN python3 -m pip install --break-system-package \
  absl-py mypy
 
