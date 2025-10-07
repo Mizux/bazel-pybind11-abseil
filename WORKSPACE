@@ -1,5 +1,6 @@
 workspace(name = "bazel-pybind11-abseil")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 ################################################################################
 #
@@ -45,7 +46,8 @@ git_repository(
 
 git_repository(
     name = "rules_python",
-    tag = "1.5.1",
+    commit = "38f2679fcc6c23a72e4c6309b7fdecb4eafcccf0",
+    #tag = "1.6.3",
     remote = "https://github.com/bazelbuild/rules_python.git",
 )
 
@@ -65,9 +67,6 @@ python_register_multi_toolchains(
     ],
     ignore_root_user_error=True,
 )
-
-load("@rules_python//python/pip_install:repositories.bzl", "pip_install_dependencies")
-pip_install_dependencies()
 
 load("@python//:pip.bzl", "multi_pip_parse")
 multi_pip_parse(
@@ -112,10 +111,12 @@ new_git_repository(
 
 new_git_repository(
     name = "pybind11_abseil",
-    tag = "v202402.0",
+    commit = "70f8b693b3b70573ca785ef62d9f48054f45d786",
+    #tag = "v202402.0",
     patches = ["//patches:pybind11_abseil.patch"],
     patch_args = ["-p1"],
     remote = "https://github.com/pybind/pybind11_abseil.git",
+    repo_mapping = {"@com_google_absl": "@abseil-cpp"},
 )
 
 ## Abseil-cpp
@@ -133,7 +134,7 @@ git_repository(
     #tag = "2024-07-02",
     remote = "https://github.com/google/re2.git",
     #repo_mapping = {"@abseil-cpp": "@com_google_absl"},
-
+)
 
 http_archive(
     name = "abseil-py",
