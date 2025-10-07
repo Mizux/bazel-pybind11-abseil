@@ -94,8 +94,8 @@ git_repository(
     name = "pybind11_bazel",
     commit = "2b6082a4d9d163a52299718113fa41e4b7978db5",
     #tag = "v2.13.6", # 2024/04/08
-    patches = ["//patches:pybind11_bazel.patch"],
-    patch_args = ["-p1"],
+    #patches = ["//patches:pybind11_bazel.patch"],
+    #patch_args = ["-p1"],
     remote = "https://github.com/pybind/pybind11_bazel.git",
 )
 
