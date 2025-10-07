@@ -4,7 +4,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 option(CMAKE_EXPORT_COMPILE_COMMANDS "Export compile command" TRUE)
 
-project(BazelPybind11Abseil VERSION 1.0 LANGUAGES CXX)
+project(BazelPybind11Abseil VERSION 1.0 LANGUAGES C CXX)
 set(PROJECT_NAMESPACE bp11)
 message(STATUS "${PROJECT_NAME} version: ${PROJECT_VERSION}")
 #message(STATUS "major: ${PROJECT_VERSION_MAJOR}")
