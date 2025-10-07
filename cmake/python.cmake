@@ -248,7 +248,7 @@ add_custom_command(
     #$<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::flags_usage_internal>>
     $<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::graphcycles_internal>>
     $<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::hash>>
-    #$<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::hashtablez_sampler>>
+    $<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::hashtablez_sampler>>
     $<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::int128>>
     $<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::kernel_timeout_internal>>
     $<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::leak_check>>
@@ -279,7 +279,7 @@ add_custom_command(
     #$<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::random_internal_seed_material>>
     #$<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::random_seed_gen_exception>>
     #$<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::random_seed_sequences>>
-    #$<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::raw_hash_set>>
+    $<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::raw_hash_set>>
     $<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::raw_logging_internal>>
     $<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::spinlock_wait>>
     $<${need_unix_absl_lib}:$<TARGET_SONAME_FILE:absl::stacktrace>>

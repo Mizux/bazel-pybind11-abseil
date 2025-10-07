@@ -197,13 +197,13 @@ index d1b7483..74e3443 100644
 +if(APPLE)
 +  set_target_properties(status_py_extension_stub PROPERTIES
 +    SUFFIX ".so"
-+    INSTALL_RPATH "@loader_path;@loader_path/../ortools/.libs"
++    INSTALL_RPATH "@loader_path;@loader_path/../bp11/.libs"
 +  )
 +  set_property(TARGET status_py_extension_stub APPEND PROPERTY
 +    LINK_FLAGS "-flat_namespace -undefined suppress")
 +elseif(UNIX)
 +  set_target_properties(status_py_extension_stub PROPERTIES
-+    INSTALL_RPATH "$ORIGIN:$ORIGIN/../ortools/.libs"
++    INSTALL_RPATH "$ORIGIN:$ORIGIN/../bp11/.libs"
 +    )
 +endif()
  

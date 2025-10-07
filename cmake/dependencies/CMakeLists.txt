@@ -109,6 +109,9 @@ if(BUILD_pybind11)
   message(CHECK_PASS "fetched")
 endif()
 
+# ##############################################################################
+# Pybind11 Abseil
+# ##############################################################################
 if(BUILD_pybind11_abseil)
   message(CHECK_START "Fetching pybind11_abseil")
   list(APPEND CMAKE_MESSAGE_INDENT "  ")
