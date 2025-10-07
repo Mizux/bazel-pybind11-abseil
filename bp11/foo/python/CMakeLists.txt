@@ -22,5 +22,5 @@ target_link_libraries(foo_pybind11 PRIVATE
 )
 add_library(${PROJECT_NAMESPACE}::foo_pybind11 ALIAS foo_pybind11)
 
-add_python_test(${CMAKE_CURRENT_SOURCE_DIR}/foo_test.py)
-add_python_test(${CMAKE_CURRENT_SOURCE_DIR}/status_test.py)
+add_python_test(FILE_NAME ${CMAKE_CURRENT_SOURCE_DIR}/foo_test.py)
+add_python_test(FILE_NAME ${CMAKE_CURRENT_SOURCE_DIR}/status_test.py)
