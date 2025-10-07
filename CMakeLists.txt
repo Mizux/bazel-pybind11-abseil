@@ -11,7 +11,7 @@ message(STATUS "${PROJECT_NAME} version: ${PROJECT_VERSION}")
 #message(STATUS "minor: ${PROJECT_VERSION_MINOR}")
 #message(STATUS "patch: ${PROJECT_VERSION_PATCH}")
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -66,9 +66,12 @@ else()
   endforeach()
 endif()
 
-if(BUILD_SHARED_LIBS AND MSVC)
+if(MSVC AND BUILD_SHARED_LIBS)
   set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 endif()
+
+# Enable CCache if any
+include(ccache)
 
 # Build deps
 option(BUILD_ZLIB "Build the ZLIB dependency Library" ON)
@@ -81,16 +84,13 @@ set_property(GLOBAL PROPERTY CTEST_TARGETS_ADDED 1)
 include(CTest)
 
 if(BUILD_TESTING)
-  option(BUILD_re2 "Build the re2 dependency Library" ON)
-  message(STATUS "Build re2: ${BUILD_re2}")
-endif()
-
-if(BUILD_TESTING)
+  option(BUILD_re2 "Build the RE2 dependency Library" ON)
   option(BUILD_googletest "Build the googletest dependency Library" ON)
-  message(STATUS "Build googletest: ${BUILD_googletest}")
 else()
+  set(BUILD_re2 OFF)
   set(BUILD_googletest OFF)
 endif()
+message(STATUS "Build re2: ${BUILD_re2}")
 message(STATUS "Build googletest: ${BUILD_googletest}")
 
 option(BUILD_pybind11 "Build pybind11 library" ON)
