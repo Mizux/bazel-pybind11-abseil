@@ -56,49 +56,49 @@ py_repositories()
 
 DEFAULT_PYTHON = "3.12"
 
-load("@rules_python//python:repositories.bzl", "python_register_toolchains")
-python_register_toolchains(
-    name = "python",
-    # Available versions are listed in @rules_python//python:versions.bzl.
-    # We recommend using the same version your team is already standardized on.
-    python_version = DEFAULT_PYTHON,
-)
-load("@rules_python//python:pip.bzl", "pip_parse")
-pip_parse(
-    name = "pypi",
-    python_interpreter_target = "@python_host//:python",
-    requirements_lock = "//bazel:requirements_lock_3_12.txt",
-)
-
-#load("@rules_python//python:repositories.bzl", "python_register_multi_toolchains")
-#python_register_multi_toolchains(
+#load("@rules_python//python:repositories.bzl", "python_register_toolchains")
+#python_register_toolchains(
 #    name = "python",
-#    default_version = DEFAULT_PYTHON,
-#    python_versions = [
-#      "3.12",
-#      "3.11",
-#      "3.10",
-#      "3.9",
-#    ],
-#    ignore_root_user_error=True,
+#    # Available versions are listed in @rules_python//python:versions.bzl.
+#    # We recommend using the same version your team is already standardized on.
+#    python_version = DEFAULT_PYTHON,
 #)
-#load("@python//:pip.bzl", "multi_pip_parse")
-#multi_pip_parse(
+#load("@rules_python//python:pip.bzl", "pip_parse")
+#pip_parse(
 #    name = "pypi",
-#    default_version = DEFAULT_PYTHON,
-#    python_interpreter_target = {
-#        "3.12": "@python_3_12_host//:python",
-#        "3.11": "@python_3_11_host//:python",
-#        "3.10": "@python_3_10_host//:python",
-#        "3.9": "@python_3_9_host//:python",
-#    },
-#    requirements_lock = {
-#        "3.12": "//bazel:requirements_lock_3_12.txt",
-#        "3.11": "//bazel:requirements_lock_3_11.txt",
-#        "3.10": "//bazel:requirements_lock_3_10.txt",
-#        "3.9": "//bazel:requirements_lock_3_9.txt",
-#    },
+#    python_interpreter_target = "@python_host//:python",
+#    requirements_lock = "//bazel:requirements_lock_3_12.txt",
 #)
+
+load("@rules_python//python:repositories.bzl", "python_register_multi_toolchains")
+python_register_multi_toolchains(
+    name = "python",
+    default_version = DEFAULT_PYTHON,
+    python_versions = [
+      "3.12",
+      "3.11",
+      "3.10",
+      "3.9",
+    ],
+    ignore_root_user_error=True,
+)
+load("@python//:pip.bzl", "multi_pip_parse")
+multi_pip_parse(
+    name = "pypi",
+    default_version = DEFAULT_PYTHON,
+    python_interpreter_target = {
+        "3.12": "@python_3_12_host//:python",
+        "3.11": "@python_3_11_host//:python",
+        "3.10": "@python_3_10_host//:python",
+        "3.9": "@python_3_9_host//:python",
+    },
+    requirements_lock = {
+        "3.12": "//bazel:requirements_lock_3_12.txt",
+        "3.11": "//bazel:requirements_lock_3_11.txt",
+        "3.10": "//bazel:requirements_lock_3_10.txt",
+        "3.9": "//bazel:requirements_lock_3_9.txt",
+    },
+)
 
 # Load the starlark macro, which will define your dependencies.
 load("@pypi//:requirements.bzl", "install_deps")
