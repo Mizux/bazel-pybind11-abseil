@@ -21,7 +21,7 @@ py_test(
     deps = [
       ":pyfoo",
       requirement("absl-py"),
-        "@pybind11_abseil//pybind11_abseil:status",
+      "@pybind11_abseil//pybind11_abseil:status",
     ],
     imports = [
       "../../../../org_pybind11_abseil",
@@ -36,7 +36,7 @@ py_test(
     srcs = ["status_test.py"],
     deps = [
       requirement("absl-py"),
-        "@pybind11_abseil//pybind11_abseil:status",
+      "@pybind11_abseil//pybind11_abseil:status",
     ],
     imports = [
       "../../../../org_pybind11_abseil",
