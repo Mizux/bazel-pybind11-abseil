@@ -54,8 +54,8 @@ git_repository(
 load("@rules_python//python:repositories.bzl", "py_repositories")
 py_repositories()
 
-load("@rules_python//python:repositories.bzl", "python_register_multi_toolchains")
 DEFAULT_PYTHON = "3.12"
+load("@rules_python//python:repositories.bzl", "python_register_multi_toolchains")
 python_register_multi_toolchains(
     name = "python",
     default_version = DEFAULT_PYTHON,
@@ -85,8 +85,9 @@ multi_pip_parse(
         "3.9": "//bazel:requirements_lock_3_9.txt",
     },
 )
-
+# Load the starlark macro, which will define your dependencies.
 load("@pypi//:requirements.bzl", "install_deps")
+# Call it to define repos for your requirements.
 install_deps()
 
 ## `pybind11_bazel`
@@ -136,14 +137,14 @@ git_repository(
     #repo_mapping = {"@abseil-cpp": "@com_google_absl"},
 )
 
-http_archive(
-    name = "abseil-py",
-    sha256 = "8a3d0830e4eb4f66c4fa907c06edf6ce1c719ced811a12e26d9d3162f8471758",
-    strip_prefix = "abseil-py-2.1.0",
-    urls = [
-        "https://github.com/abseil/abseil-py/archive/refs/tags/v2.1.0.tar.gz",
-    ],
-)
+#http_archive(
+#    name = "abseil-py",
+#    sha256 = "8a3d0830e4eb4f66c4fa907c06edf6ce1c719ced811a12e26d9d3162f8471758",
+#    strip_prefix = "abseil-py-2.1.0",
+#    urls = [
+#        "https://github.com/abseil/abseil-py/archive/refs/tags/v2.1.0.tar.gz",
+#    ],
+#)
 
 # Testing
 ## Googletest
