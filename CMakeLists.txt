@@ -1,23 +1,24 @@
 # This file is just an orchestration
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.24..3.31)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 # Enable output of compile commands during generation.
 option(CMAKE_EXPORT_COMPILE_COMMANDS "Export compile command" ON)
 
-project(BazelPybind11Abseil VERSION 1.0 LANGUAGES C CXX)
+project(BazelPybind11Abseil VERSION 1.0.0 LANGUAGES C CXX)
 set(PROJECT_NAMESPACE bp11)
 message(STATUS "${PROJECT_NAME} version: ${PROJECT_VERSION}")
 #message(STATUS "major: ${PROJECT_VERSION_MAJOR}")
 #message(STATUS "minor: ${PROJECT_VERSION_MINOR}")
 #message(STATUS "patch: ${PROJECT_VERSION_PATCH}")
 
+message(STATUS "system name: ${CMAKE_SYSTEM_NAME}")
+# Set max os target version.
+set(CMAKE_OSX_DEPLOYMENT_TARGET 10.15)
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-
-# Set max os target version.
-set(CMAKE_OSX_DEPLOYMENT_TARGET 10.15)
 
 # Default Build Type to be Release
 get_property(isMultiConfig GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
@@ -104,12 +105,14 @@ message(STATUS "Python: Generate stub file: ${GENERATE_PYTHON_STUB}")
 option(FETCH_PYTHON_DEPS "Install python required modules if not available" ON)
 message(STATUS "Python: Fetch dependencies: ${FETCH_PYTHON_DEPS}")
 
+option(VENV_USE_SYSTEM_SITE_PACKAGES "Python venv can use system site packages" OFF)
+message(STATUS "Python: Allow venv to use system site packages: ${VENV_USE_SYSTEM_SITE_PACKAGES}")
+
 # Find system deps
 include(system_deps)
 
 # Build Needed dependencies
 add_subdirectory(cmake/dependencies dependencies)
-#list(APPEND CMAKE_PREFIX_PATH ${CMAKE_CURRENT_BINARY_DIR}/dependencies/install)
 
 # verify deps
 include(check_deps)
