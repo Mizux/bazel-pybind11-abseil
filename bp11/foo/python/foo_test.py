@@ -21,17 +21,18 @@ if __debug__:
 
 class TestFoo(absltest.TestCase):
     """Test Foo"""
-    message_regex = 'Status module has not been imported.*'
+
+    message_regex = "Status module has not been imported.*"
 
     def test_absl_function(self):
         self.assertIsNone(fpf.absl_function("good"))
 
         with self.assertRaises(status.StatusNotOk) as cm:
-          fpf.absl_function("error")
+            fpf.absl_function("error")
         self.assertEqual(cm.exception.status.code(), status.StatusCode.INTERNAL)
-        self.assertEqual(cm.exception.status.message(), 'error')
+        self.assertEqual(cm.exception.status.message(), "error")
         self.assertEqual(cm.exception.code, int(status.StatusCode.INTERNAL))
-        self.assertEqual(cm.exception.message, 'error')
+        self.assertEqual(cm.exception.message, "error")
 
     def test_absl_duration(self):
         duration = fpf.make_duration(3600)
@@ -45,7 +46,7 @@ class TestFoo(absltest.TestCase):
         self.assertFalse(fpf.is_infinite_duration(fpf.make_duration(123)))
 
     def test_absl_time(self):
-        time = fpf.make_time(3600);
+        time = fpf.make_time(3600)
         self.assertTrue(fpf.check_datetime(time, 3600))
 
     def test_absl_status(self):
@@ -53,11 +54,11 @@ class TestFoo(absltest.TestCase):
 
         # The return_status function should convert a non-ok status to an exception.
         with self.assertRaises(status.StatusNotOk) as cm:
-          fpf.return_status(status.StatusCode.CANCELLED, 'test')
+            fpf.return_status(status.StatusCode.CANCELLED, "test")
         self.assertEqual(cm.exception.status.code(), status.StatusCode.CANCELLED)
-        self.assertEqual(cm.exception.status.message(), 'test')
+        self.assertEqual(cm.exception.status.message(), "test")
         self.assertEqual(cm.exception.code, int(status.StatusCode.CANCELLED))
-        self.assertEqual(cm.exception.message, 'test')
+        self.assertEqual(cm.exception.message, "test")
 
     def test_free_function(self):
         fpf.free_function(2147483647)  # max int
