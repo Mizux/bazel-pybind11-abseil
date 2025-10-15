@@ -5,7 +5,7 @@ load("@pypi//:requirements.bzl", "requirement")
 
 pybind_extension(
     name = "pyfoo",
-    srcs = ["foo.cpp"],
+    srcs = ["foo.cc"],
     deps = [
         "//bp11/foo:foo",
         "@pybind11_abseil//pybind11_abseil:import_status_module",
