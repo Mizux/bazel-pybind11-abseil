@@ -20,6 +20,7 @@ bazel/Makefile
 bazel/cache
 
 # CMake
+cmake/README.md
 cmake/docker
 cmake/docs
 cmake/Makefile
@@ -28,6 +29,7 @@ cmake/cache
 # Native build
 .cache/
 .vagrant/
+**/__pycache__
 bazel-*/
 *.lock
 build/
