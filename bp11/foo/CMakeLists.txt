@@ -13,4 +13,8 @@ add_cxx_library(
     absl::time
 )
 
-add_cpp_test(${CMAKE_CURRENT_SOURCE_DIR}/foo_test.cc)
+add_cxx_test(
+  NAME foo_test
+  SOURCES foo_test.cc
+  LINK_LIBRARIES ${PROJECT_NAMESPACE}::foo
+)
