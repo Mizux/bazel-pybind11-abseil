@@ -1,6 +1,7 @@
 # Python wrapper for foo library.
-load("@rules_python//python:defs.bzl", "py_test")
 load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
+load("@rules_python//python:py_library.bzl", "py_library")
+load("@rules_python//python:py_test.bzl", "py_test")
 load("@pypi//:requirements.bzl", "requirement")
 
 pybind_extension(
@@ -14,12 +15,18 @@ pybind_extension(
     ],
 )
 
+py_library(
+    name = "pyfoo_lib",
+    data = [":pyfoo"],
+    imports = ["."],
+)
+
 py_test(
     name = "foo_test",
     size = "small",
     srcs = ["foo_test.py"],
     deps = [
-      ":pyfoo",
+      ":pyfoo_lib",
       requirement("absl-py"),
       "@pybind11_abseil//pybind11_abseil:status",
     ],
