@@ -12,7 +12,7 @@ bazel_dep(name = "rules_cc", version = "0.2.9")
 bazel_dep(name = "rules_python", version = "1.6.3")
 bazel_dep(name = "abseil-cpp", version = "20250814.0")
 bazel_dep(name = "abseil-py", version = "2.1.0")
-bazel_dep(name = "pybind11_bazel", version = "2.13.6")
+bazel_dep(name = "pybind11_bazel", version = "3.0.0")
 bazel_dep(name = "pybind11_abseil", version = "202402.0")
 
 git_override(
@@ -35,7 +35,7 @@ SUPPORTED_PYTHON_VERSIONS = [
     "3.9",
 ]
 
-DEFAULT_PYTHON = "3.12"
+DEFAULT_PYTHON = "3.13"
 python = use_extension("@rules_python//python/extensions:python.bzl", "python", dev_dependency = True)
 
 [
@@ -53,11 +53,11 @@ pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip", dev_depen
 
 [
     pip.parse(
-        hub_name = "pypi_bp11_absl",
+        hub_name = "bp11_absl_pip_deps",
         python_version = version,
-        requirements_lock = "//bazel:requirements_lock_" + version.replace(".", "_") + ".txt",
+        requirements_lock = "//bazel:requirements.txt",
     )
     for version in SUPPORTED_PYTHON_VERSIONS
 ]
 
-use_repo(pip, pypi = "pypi_bp11_absl")
+use_repo(pip, pypi = "bp11_absl_pip_deps")

@@ -1,10 +1,9 @@
 # Code dependencies
 absl-py==2.1.0
+mypy==1.18.2
 
-mypy==1.6.1
-
-black==24.3.0
+black==25.9.0
 
 # Example dependencies
-numpy==1.26.1
-pandas==2.1.2
+numpy>=2.2.0
+pandas>=2.1.2
