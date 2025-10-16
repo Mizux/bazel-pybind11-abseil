@@ -70,43 +70,6 @@ pip_parse(
     requirements_lock = "//bazel:requirements.txt",
 )
 
-#load("@rules_python//python:repositories.bzl", "python_register_multi_toolchains")
-#python_register_multi_toolchains(
-#    name = "python",
-#    default_version = DEFAULT_PYTHON,
-#    python_versions = [
-#      "3.14",
-#      "3.13",
-#      "3.12",
-#      "3.11",
-#      "3.10",
-#      "3.9",
-#    ],
-#    ignore_root_user_error=True,
-#)
-#load("@python//:pip.bzl", "multi_pip_parse")
-#multi_pip_parse(
-#    name = "pypi",
-#    default_version = DEFAULT_PYTHON,
-#    python_interpreter_target = {
-#        "3.14": "@python_3_14_host//:python",
-#        "3.13": "@python_3_13_host//:python",
-#        "3.12": "@python_3_12_host//:python",
-#        "3.11": "@python_3_11_host//:python",
-#        "3.10": "@python_3_10_host//:python",
-#        "3.9": "@python_3_9_host//:python",
-#    },
-#
-#    requirements_lock = {
-#        "3.14": "//bazel:requirements.txt",
-#        "3.13": "//bazel:requirements.txt",
-#        "3.12": "//bazel:requirements.txt",
-#        "3.11": "//bazel:requirements.txt",
-#        "3.10": "//bazel:requirements.txt",
-#        "3.9" : "//bazel:requirements.txt",
-#    },
-#)
-
 # Load the starlark macro, which will define your dependencies.
 load("@pypi//:requirements.bzl", "install_deps")
 # Call it to define repos for your requirements.
