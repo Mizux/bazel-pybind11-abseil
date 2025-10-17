@@ -30,9 +30,7 @@ py_test(
       requirement("absl-py"),
       "@pybind11_abseil//pybind11_abseil:status",
     ],
-    imports = [
-      "../../../../org_pybind11_abseil",
-    ],
+    imports = ["../../../../pybind11_abseil"],
     python_version = "PY3",
     tags = ["unit"],
 )
@@ -45,9 +43,7 @@ py_test(
       requirement("absl-py"),
       "@pybind11_abseil//pybind11_abseil:status",
     ],
-    imports = [
-      "../../../../org_pybind11_abseil",
-    ],
+    imports = ["../../../../pybind11_abseil"],
     python_version = "PY3",
     srcs_version = "PY3",
 )
