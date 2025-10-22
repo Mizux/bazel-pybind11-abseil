@@ -6,8 +6,7 @@ FROM debian:latest AS env
 ENV PATH=/usr/local/bin:$PATH
 RUN apt update -qq \
 && apt install -yq \
- git wget libssl-dev \
- build-essential cmake \
+ git wget libssl-dev build-essential cmake \
 && apt clean \
 && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -30,7 +29,7 @@ COPY . .
 FROM devel AS build
 RUN cmake --version
 RUN cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
-RUN cmake --build build --target all -v
+RUN cmake --build build --target all -v -j 4
 RUN cmake --build build --target install -v
 
 FROM build AS test
@@ -39,8 +38,7 @@ RUN CTEST_OUTPUT_ON_FAILURE=1 cmake --build build --target test -v
 # Test install rules
 FROM env AS install_env
 COPY --from=build /home/project/build/python/dist/*.whl ./
-RUN python3 -m pip install --break-system-packages \
- --find-links=. \
+RUN python3 -m pip install --break-system-packages --find-links=. \
  bp11*.whl
 
 FROM install_env AS install_devel

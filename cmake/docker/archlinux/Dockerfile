@@ -6,8 +6,8 @@ FROM archlinux:latest AS env
 ENV PATH=/root/.local/bin:$PATH
 RUN pacman -Syu --noconfirm \
  git base-devel cmake \
- python python-pip \
- python-wheel python-virtualenv python-setuptools
+ python python-pip python-wheel python-setuptools \
+ python-virtualenv
 RUN python -m pip install --break-system-package \
  absl-py mypy
 
@@ -19,7 +19,7 @@ COPY . .
 FROM devel AS build
 RUN cmake --version
 RUN cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
-RUN cmake --build build --target all -v
+RUN cmake --build build --target all -v -j 4
 RUN cmake --build build --target install -v
 
 FROM build AS test
@@ -28,9 +28,7 @@ RUN CTEST_OUTPUT_ON_FAILURE=1 cmake --build build --target test -v
 # Test install rules
 FROM env AS install_env
 COPY --from=build /home/project/build/python/dist/*.whl ./
-RUN python -m pip install \
- --find-links=. \
- --break-system-packages \
+RUN python -m pip install --break-system-packages --find-links=. \
  bp11*.whl
 
 FROM install_env AS install_devel

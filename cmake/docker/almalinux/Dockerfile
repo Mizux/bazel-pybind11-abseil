@@ -6,12 +6,11 @@ FROM almalinux:latest AS env
 ENV PATH=/usr/local/bin:$PATH
 RUN dnf -y update \
 && dnf -y install git wget openssl-devel cmake \
-&& dnf -y groupinstall "Development Tools" \
+&& dnf -y group install "Development Tools" \
 && dnf clean all \
 && rm -rf /var/cache/dnf
 CMD [ "/usr/bin/bash" ]
 
-# Install Python
 RUN dnf -y update \
 && dnf -y install python3-devel python3-pip \
 && dnf clean all \
@@ -27,7 +26,7 @@ COPY . .
 FROM devel AS build
 RUN cmake --version
 RUN cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
-RUN cmake --build build --target all -v
+RUN cmake --build build --target all -v -j 4
 RUN cmake --build build --target install -v
 
 FROM build AS test
