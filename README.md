@@ -58,7 +58,7 @@ You'll need:
 
 The project layout is as follow:
 
-* [WORKSPACE](WORKSPACE) Top-level for [Bazel](https://bazel.build) based build.
+* [MODULE.bazel](MODULE.bazel) Top-level for [Bazel](https://bazel.build) based build.
 * [CMakeLists.txt](CMakeLists.txt) Top-level for [CMake](https://cmake.org) based build.
 * [pure_lib](pure_lib) Pure python library to check Bazel Python support.
 * [bp11](bp11) Python package name.
