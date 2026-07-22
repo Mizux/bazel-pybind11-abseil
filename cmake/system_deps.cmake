@@ -17,6 +17,7 @@ if(NOT BUILD_absl AND NOT TARGET absl::base)
   find_package(absl REQUIRED)
 endif()
 
+# CXX Test
 if(BUILD_TESTING)
   if(NOT BUILD_re2 AND NOT TARGET re2::re2)
     find_package(re2 REQUIRED)

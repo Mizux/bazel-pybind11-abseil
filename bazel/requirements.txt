@@ -4,7 +4,7 @@
 #
 #    bazel run //bazel:bp11_requirements.update
 #
-absl-py==2.1.0
+absl-py==2.4.0
     # via -r bazel/requirements.in
 black==25.9.0
     # via -r bazel/requirements.in

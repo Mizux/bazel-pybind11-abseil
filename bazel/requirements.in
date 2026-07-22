@@ -1,5 +1,5 @@
 # Code dependencies
-absl-py==2.1.0
+absl-py==2.4.0
 mypy==1.18.2
 
 black==25.9.0

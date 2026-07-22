@@ -11,10 +11,9 @@ bazel_dep(name = "platforms", version = "1.1.0")
 bazel_dep(name = "rules_cc", version = "0.2.20")
 bazel_dep(name = "rules_python", version = "2.0.0")
 bazel_dep(name = "abseil-cpp", version = "20260526.0")
-bazel_dep(name = "abseil-py", version = "2.1.0")
-bazel_dep(name = "pybind11_bazel", version = "3.0.0")
+bazel_dep(name = "abseil-py", version = "2.4.0")
+bazel_dep(name = "pybind11_bazel", version = "3.0.1")
 bazel_dep(name = "pybind11_abseil", version = "202402.0")
-
 git_override(
     module_name = "pybind11_abseil",
     commit = "70f8b693b3b70573ca785ef62d9f48054f45d786",
@@ -32,7 +31,6 @@ SUPPORTED_PYTHON_VERSIONS = [
     "3.12",
     "3.11",
     "3.10",
-    "3.9",
 ]
 
 DEFAULT_PYTHON = "3.13"
